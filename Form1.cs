@@ -27,7 +27,7 @@ namespace A10Blok
                 konekcija.Open();
                 string sqlUpit = "SELECT PecarosID, Ime, Prezime, Adresa, Grad, Telefon " +
                     "FROM Pecaros, Grad " +
-                    "WHERE Pecaros.GradID = Grad.GradID";
+                    "WHERE Pecaros.GradID = Grad.GradID " + "ORDER BY PecarosID ASC";
                 SqlCommand komanda = new SqlCommand(sqlUpit, konekcija);
                 SqlDataAdapter da = new SqlDataAdapter(komanda);
                 dt.Clear();
@@ -50,22 +50,12 @@ namespace A10Blok
         {
             try
             {
-                konekcija.Open();
-                string sqlUpit = "SELECT PecarosID, Ime, Prezime, Adresa, Grad, Telefon " +
-                    "FROM Pecaros, Grad " +
-                    "WHERE Pecaros.GradID = Grad.GradID " +
-                    "ORDER BY PecarosID ASC";
-                SqlCommand komanda = new SqlCommand(sqlUpit, konekcija);
-                SqlDataAdapter da = new SqlDataAdapter(komanda);
-                DataTable dt2 = new DataTable();
-                da.Fill(dt2);
-                konekcija.Close();
-                tbSifra.Text = dt2.Rows[0]["PecarosID"].ToString();
-                tbIme.Text = dt2.Rows[0]["Ime"].ToString();
-                tbPrezime.Text = dt2.Rows[0]["Prezime"].ToString();
-                tbAdresa.Text = dt2.Rows[0]["Adresa"].ToString();
-                cbGrad.Text = dt2.Rows[0]["Grad"].ToString();
-                tbTelefon.Text = dt2.Rows[0]["Telefon"].ToString();
+                tbSifra.Text = dt.Rows[0]["PecarosID"].ToString();
+                tbIme.Text = dt.Rows[0]["Ime"].ToString();
+                tbPrezime.Text = dt.Rows[0]["Prezime"].ToString();
+                tbAdresa.Text = dt.Rows[0]["Adresa"].ToString();
+                cbGrad.Text = dt.Rows[0]["Grad"].ToString();
+                tbTelefon.Text = dt.Rows[0]["Telefon"].ToString();
             }
             catch (Exception ex)
             {
@@ -169,5 +159,7 @@ namespace A10Blok
             Uputstvo u1 = new Uputstvo();
             u1.Show();
         }
+
+        
     }
 }
